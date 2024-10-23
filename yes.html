@@ -3,68 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proxy Server Interface</title>
+    <title>Google Searcher with Discord</title>
     <style>
         body {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            max-width: 600px;
-            margin: auto;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background: linear-gradient(270deg, #ff7e5f, #feb47b);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
         }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
         input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
-            border: 1px solid #ccc;
+            border: 2px solid #4CAF50;
             border-radius: 5px;
+            transition: border-color 0.3s;
         }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #45a049;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+        }
+
         button {
-            padding: 10px 15px;
-            background-color: #28a745;
+            padding: 12px 20px;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
+
         button:hover {
-            background-color: #218838;
-        }
-        #response {
-            margin-top: 20px;
-            white-space: pre-wrap;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #f8f9fa;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1>Proxy</h1>
-    <input type="text" id="url" placeholder="Enter URL or Search" />
-    <button onclick="fetchUrl()">Go!</button>
-
-    <div id="response"></div>
+    <div class="container">
+        <h1>Google Searcher</h1>
+        <input type="text" id="query" placeholder="Enter your search query" />
+        <div class="button-container">
+            <button onclick="performSearch()">Search</button>
+            <button onclick="openDiscord()">Open Discord</button>
+        </div>
+    </div>
 
     <script>
-        async function fetchUrl() {
-            const url = document.getElementById('url').value;
-            const responseDiv = document.getElementById('response');
+        function performSearch() {
+            const query = document.getElementById('query').value;
+            const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            window.location.href = googleSearchUrl; // Redirect to Google search results
+        }
 
-            try {
-                // Update with your proxy server's address and port
-                const proxyUrl = `149.20.253.66:12551?url=${encodeURIComponent(url)}`;
-                const response = await fetch(proxyUrl);
-                if (!response.ok) throw new Error('Network response was not ok');
-
-                const data = await response.text();
-                responseDiv.textContent = data;
-            } catch (error) {
-                responseDiv.textContent = 'Error: ' + error.message;
-            }
+        function openDiscord() {
+            const discordUrl = `http://149.20.253.66:12551?url=${encodeURIComponent('https://discord.com')}`;
+            window.location.href = discordUrl; // Redirect to Discord through the proxy
         }
     </script>
 </body>
