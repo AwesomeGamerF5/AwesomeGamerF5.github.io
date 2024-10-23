@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Searcher with Proxy</title>
+    <title>School Proxy</title>
     <style>
+        @font-face {
+            font-family: 'Minecraftia';
+            src: url('fonts/minecraftia.ttf') format('truetype'); /* Adjust the path as necessary */
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Minecraftia', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -14,7 +19,7 @@
             align-items: center;
             height: 100vh;
             text-align: center;
-            background: linear-gradient(270deg, #ff7e5f, #feb47b);
+            background: linear-gradient(135deg, #4a90e2, #9013fe, #f0f, #00c6ff);
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite;
         }
@@ -26,64 +31,84 @@
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         h1 {
             margin-bottom: 20px;
-            color: #4CAF50;
+            color: #333;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             margin: 10px 0;
-            border: 2px solid #4CAF50;
-            border-radius: 5px;
+            border: 2px solid #4a90e2;
+            border-radius: 8px;
+            font-size: 1.2em;
             transition: border-color 0.3s;
         }
 
         input[type="text"]:focus {
             outline: none;
-            border-color: #45a049;
+            border-color: #9013fe;
         }
 
         button {
-            padding: 12px 20px;
-            background-color: #4CAF50;
+            padding: 15px 25px;
+            background-color: #4a90e2;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1.2em;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #9013fe;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            input[type="text"], button {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Google Searcher</h1>
-        <input type="text" id="query" placeholder="Enter your search query" />
-        <button onclick="performSearch()">Search</button>
+        <h1>School Proxy</h1>
+        <input type="text" id="url" placeholder="Enter URL to visit" />
+        <button onclick="visitSite()">Go</button>
     </div>
 
     <script>
-        function performSearch() {
-            const query = document.getElementById('query').value;
-            const proxyUrl = `http://149.20.253.66:12551?url=${encodeURIComponent('https://www.google.com/search?q=' + query)}`;
-            window.location.href = proxyUrl; // Redirect to Google search results through the proxy
+        function visitSite() {
+            const url = document.getElementById('url').value;
+            // Validate URL
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                alert('Please enter a valid URL starting with http:// or https://');
+                return;
+            }
+            // Construct the URL to the proxy
+            const proxyUrl = `http://34.205.61.74:3128?url=${encodeURIComponent(url)}`;
+            window.location.href = proxyUrl; // Redirect to the proxy URL
         }
     </script>
 </body>
