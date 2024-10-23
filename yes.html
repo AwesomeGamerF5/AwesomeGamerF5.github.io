@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Searcher with Discord</title>
+    <title>Google Searcher with Proxy</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,8 +90,8 @@
     <script>
         function performSearch() {
             const query = document.getElementById('query').value;
-            const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-            window.location.href = googleSearchUrl; // Redirect to Google search results
+            const proxyUrl = `http://149.20.253.66:12551?url=${encodeURIComponent('https://www.google.com/search?q=' + query)}`;
+            window.location.href = proxyUrl; // Redirect to Google search results through the proxy
         }
 
         function openDiscord() {
