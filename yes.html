@@ -57,11 +57,6 @@
             border-color: #45a049;
         }
 
-        .button-container {
-            display: flex;
-            gap: 10px; /* Space between buttons */
-        }
-
         button {
             padding: 12px 20px;
             background-color: #4CAF50;
@@ -81,10 +76,7 @@
     <div class="container">
         <h1>Google Searcher</h1>
         <input type="text" id="query" placeholder="Enter your search query" />
-        <div class="button-container">
-            <button onclick="performSearch()">Search</button>
-            <button onclick="openDiscord()">Open Discord</button>
-        </div>
+        <button onclick="performSearch()">Search</button>
     </div>
 
     <script>
@@ -92,11 +84,6 @@
             const query = document.getElementById('query').value;
             const proxyUrl = `http://149.20.253.66:12551?url=${encodeURIComponent('https://www.google.com/search?q=' + query)}`;
             window.location.href = proxyUrl; // Redirect to Google search results through the proxy
-        }
-
-        function openDiscord() {
-            const discordUrl = `http://149.20.253.66:12551?url=${encodeURIComponent('https://discord.com')}`;
-            window.location.href = discordUrl; // Redirect to Discord through the proxy
         }
     </script>
 </body>
